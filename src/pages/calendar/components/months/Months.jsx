@@ -1,27 +1,54 @@
 import React, { useState } from 'react';
 import { CaretRight, CaretLeft } from "react-bootstrap-icons";
 import { useSelector, useDispatch } from 'react-redux'
-import { setDisplayDay } from './monthsSlice'
+import { setDisplayDay, setDisplayMonth, incrementDisplayMonth, decrementDisplayMonth } from './monthsSlice'
 
 const Months = () => {
     const displayDay = useSelector((state) => state.months.displayDay)
+    const displayMonth = useSelector((state) => state.months.displayMonth)
+    const displayYear = useSelector((state) => state.months.displayYear)
     const dispatch = useDispatch()
 
-    const [today, setToday] = useState(4);
+    const months = [null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
+
+    const daysInMonth = (month) => {
+        if(month % 2 == 1){
+            return 31
+        }else if(month == 2){
+            return 28
+        }else{
+            return 30
+        }
+    }
+
+    const calculatePrevDays = () => {
+        let day = new Date(displayYear + "-" + displayMonth + "-01").getDay();
+        return day;
+    }
+
+    let previousDaysCount = calculatePrevDays();
+    let futureDaysCount = (42 - daysInMonth(displayMonth)) - previousDaysCount;
 
     const days = [];
-    for (let i = 1; i <= 31; i++) {
+    for (let i = 1; i <= daysInMonth(displayMonth); i++) {
         days[i] = i;
     }
 
-    function isActiveDay(day){
-        return day == displayDay? true : false;
+    const previousDays = [];
+    for (let i = daysInMonth(displayMonth - 1) - previousDaysCount + 1; i <= daysInMonth(displayMonth - 1); i++) {
+        previousDays[i] = i;
     }
 
-    function CalendarDay({day}){
-        if(isActiveDay(day)){
+    const futureDays = [];
+    for (let i = 1; i <= futureDaysCount; i++) {
+        futureDays[i] = i;
+    }
+
+    const CalendarDay = ({day}) => {
+        if(day == displayDay){
             return(
-                <button className="text-NavBarColor bg-RedEventColor transition-all w-8 h-8 rounded-lg flex justify-center items-center" onClick={() => {dispatch(setDisplayDay(day));}}> {day} </button>
+                <button className="text-NavBarColor bg-RedEventColor transition-all w-8 h-8 rounded-lg flex justify-center items-center" onClick={() => {dispatch(setDisplayDay(day))}}> {day} </button>
             )
         }else{
             return(
@@ -30,21 +57,43 @@ const Months = () => {
         }
     }
 
+    const PlaceholderCalendarDay = ({day}) => {
+        return(
+            <div className="w-8 h-8 rounded-full flex justify-center items-center">{day}</div>
+        )
+    }
+
     return(
-        <div className="grid grid-cols-7 grid-rows-7 gap-x-2 gap-y-4 border-BodyColor border-2 p-2 rounded-xl select-none">
+        <div className="grid grid-cols-7 grid-rows-8 gap-x-2 gap-y-4 border-BodyColor border-2 p-2 rounded-xl select-none">
             <div className="w-full flex items-center justify-center col-span-7 ">
                 <div className="flex items-center justify-center w-fit bg-BodyColor px-2 rounded-xl">
-                    <div className="transition-all bg-BodyColor rounded-3xl border-BodyColor border-2 hover:border-LinesColor hover:border-2">
+                    <div onClick={() => dispatch(decrementDisplayMonth())} className="transition-all bg-BodyColor rounded-3xl border-BodyColor border-2 hover:border-LinesColor hover:border-2">
                         <CaretLeft color="gray" size={20}/>
                     </div>
-                    <div className="w-fit h-8 bg-BodyColor px-5 py-3 flex justify-center items-center rounded-md">{displayDay}</div>
-                    <div className="transition-all bg-BodyColor rounded-3xl border-BodyColor border-2 hover:border-LinesColor hover:border-2">
+                    <div className="w-48 h-8 bg-BodyColor px-5 py-3 flex justify-center items-center rounded-md">{months[displayMonth]} {displayYear}</div>
+                    <div onClick={() => dispatch(incrementDisplayMonth())} className="transition-all bg-BodyColor rounded-3xl border-BodyColor border-2 hover:border-LinesColor hover:border-2">
                         <CaretRight color="gray" size={20}/>
                     </div>
                 </div>
             </div>
+            <div className='bg-BodyColor col-span-7 h-8 -mx-2 px-2'>
+                <div className=' grid grid-cols-7 grid-rows-8 gap-x-2'>
+                    {weekDays.map(wd => (
+                        <div className='w-8 h-8 flex justify-center items-center'>{wd}</div>
+                    ))}
+                </div>
+            </div>
+
+            {previousDays.map(d => (
+                <PlaceholderCalendarDay day={d}/>
+            ))}
+
             {days.map(d => (
                 <CalendarDay day={d}/>
+            ))}
+
+            {futureDays.map(d => (
+                <PlaceholderCalendarDay day={d}/>
             ))}
         </div>
     )
