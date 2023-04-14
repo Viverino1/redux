@@ -16,7 +16,7 @@ const Calendar = () => {
             <div className="relative top-0 left-0 bottom-0">
                 <Menu/>
             </div>
-            <div className="relative top-0 right-0 left-0 bottom-0 w-full overflow-scroll">
+            <div className="relative top-0 right-0 left-0 bottom-0 w-full overflow-y-scroll overflow-x-clip">
                 <DayView/>
             </div>
         </div>

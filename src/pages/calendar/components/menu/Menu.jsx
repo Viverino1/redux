@@ -1,16 +1,11 @@
-import { List } from "react-bootstrap-icons";
+import { useSelector } from 'react-redux'
 import Months from "../months/Months";
 
-const Menu = ({enable}) => {
+const Menu = () => {
+    const isActive = useSelector((state) => state.menu.isActive)
     return(
-        <div className="relative transition-width hover:w-96 w-16 duration-300 h-[calc(100vh-theme(space.16))] bg-NavBarColor group overflow-clip">
-            <div className="absolute top-0 left-0 w-16 h-full">
-                <div className="absolute right-0 top-0 bottom-0 h-full w-0.5 bg-BodyColor"></div>
-                <div className="h-16 w-16 flex justify-center items-center">
-                    <List color="gray" size={40}/>
-                </div>
-            </div>
-            <div className="absolute top-0 pl-16 w-full">
+        <div className={`relative transition-width ${isActive ? "w-80" : "w-0"} duration-300 h-[calc(100vh-theme(space.16))] bg-NavBarColor group overflow-clip`}>
+            <div className="absolute top-0 w-full">
                 <div className="h-16 w-full flex justify-center items-center overflow-clip">
                     Menu
                 </div>
