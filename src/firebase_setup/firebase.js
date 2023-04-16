@@ -1,9 +1,8 @@
  // Import the functions you need from the SDKs you need
  import { initializeApp } from "firebase/app";
- import { getFirestore } from "firebase/firestore";
- // TODO: Add SDKs for Firebase products that you want to use
- // https://firebase.google.com/docs/web/setup#available-libraries
- // Your web app's Firebase configuration
+ import { getFirestore, query, getDocs, collection, where, addDoc, } from "firebase/firestore";
+ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+
  const firebaseConfig = {
     apiKey: process.env.REACT_APP_apiKey,
     authDomain: process.env.REACT_APP_authDomain,
@@ -13,9 +12,34 @@
     appId: process.env.REACT_APP_appId,
     measurementId: process.env.REACT_APP_measurementId
 };
- // Initialize Firebase
+
+const googleProvider = new GoogleAuthProvider();
+const signInWithGoogle = async () => {
+  try {
+    const res = await signInWithPopup(auth, googleProvider)
+    const user = res.user;
+    const q = query(collection(db, "users"), where("uid", "==", user.uid));
+    const docs = await getDocs(q); 
+    if (docs.docs.length === 0) {
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: "google",
+        photoURL : user.photoURL, 
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const logout = () => {
+    signOut(auth);
+  };
  
- const app = initializeApp(firebaseConfig);
- // Export firestore database
- // It will be imported into your react app whenever it is needed
- export const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+export { auth, db, signInWithGoogle, logout, };

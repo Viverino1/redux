@@ -1,6 +1,9 @@
 import { List } from "react-bootstrap-icons";
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleIsActive } from "../../../pages/calendar/components/menu/menuSlice";
+import { toggleProfileIsActive } from "../profileMenu/profileMenuSlice";
+import { auth } from "../../../firebase_setup/firebase";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
     const displayDay = useSelector((state) => state.months.displayDay)
@@ -14,6 +17,19 @@ const NavBar = () => {
 
     let dayOfWeek = new Date(displayYear + "-" + displayMonth + "-" + displayDay).getDay();
     let ending;
+
+    const [userName, setUserName] = useState("")
+    const [userPhotoURL, setUserPhotoURL] = useState("")
+
+    auth.onAuthStateChanged(user => {
+        if(user){
+            setUserName(user.displayName)
+            setUserPhotoURL(user.photoURL)
+        }else{
+            setUserName("")
+            setUserPhotoURL("./cosmicLogo.png")
+        }
+    })
 
     switch(displayDay){
         case 1:
@@ -44,9 +60,9 @@ const NavBar = () => {
 
                 <div>{weekDays[dayOfWeek]}, {months[displayMonth]} {displayDay}{ending}, {displayYear}</div>
 
-                <button className="pr-3 absolute top-0 right-0 h-16 flex justify-center items-center space-x-5">
-                    <div>Cosmic</div>
-                    <img src="./cosmic.png" alt="Cosmic Logo" className="w-10 rounded-3xl"/>
+                <button className="pr-3 absolute top-0 right-0 h-16 flex justify-center items-center space-x-5" onClick={() => {dispatch(toggleProfileIsActive())}}>
+                    <div>{userName}</div>
+                    <img src={userPhotoURL} alt="Cosmic Logo" className="w-10 rounded-3xl"/>
                 </button>
             </div>
         </div>

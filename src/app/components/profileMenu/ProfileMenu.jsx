@@ -1,10 +1,29 @@
 import { useSelector } from 'react-redux'
+import { auth, signInWithGoogle, logout } from "../../../firebase_setup/firebase"
+import { useState } from 'react'
 
 const ProfileMenu = () => {
-    const profileMenuIsActive = ((state) => state.profileMenu.isActive)
+    const profileMenuIsActive = useSelector((state) => state.profileMenu.isActive)
+    const[isLoggedIn, setIsLoggedIn] = useState(false);
+
+    auth.onAuthStateChanged(user => {
+        if(user){
+            setIsLoggedIn(true)
+        }else{
+            setIsLoggedIn(false)
+        }
+    })
+
     return(
-        <div className="w-64 h-64 bg-NavBarColor flex justify-center items-center invisible">
-            Profile
+        <div className={`${profileMenuIsActive == true ? "w-40" : "w-0"}  transition-width duration-300 overflow-clip`}>
+            <div className='flex flex-col space-y-5 justify-center items-center w-full p-5 bg-NavBarColor rounded-xl'>
+                <button className=' w-32 h-8 bg-BodyColor rounded-lg' onClick={() => {isLoggedIn ? logout() : signInWithGoogle()}}>
+                    {isLoggedIn ? "Logout" : "Login"}
+                </button>
+                <button className=' w-32 h-8 bg-BodyColor rounded-lg'>
+                    Settings
+                </button>
+            </div>
         </div>
     )
 }

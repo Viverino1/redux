@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Calendar from "../pages/calendar/Calendar";
+import Login from "../pages/signin/Signin";
 import NavBar from "./components/navbar/NavBar";
 import ProfileMenu from "./components/profileMenu/ProfileMenu";
 
@@ -17,6 +18,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/calendar" element={<Calendar/>}/>
+                    <Route path="/signin" element={<Login/>}/>
                 </Routes>
             </div>
         </div>

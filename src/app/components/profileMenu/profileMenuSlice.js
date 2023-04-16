@@ -1,20 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  isActive: true,
+  isActive: false,
 }
 
 export const profileMenuSlice = createSlice({
   name: 'profileMenu',
   initialState,
   reducers: {
-    toggleIsActive(state){
+    toggleProfileIsActive(state){
         state.isActive = !state.isActive;
+        console.log(state.isActive)
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { toggleIsActive } = profileMenuSlice.actions
+export const { toggleProfileIsActive } = profileMenuSlice.actions
 
 export default profileMenuSlice.reducer
