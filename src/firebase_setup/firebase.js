@@ -1,6 +1,6 @@
  // Import the functions you need from the SDKs you need
  import { initializeApp } from "firebase/app";
- import { getFirestore, query, getDocs, collection, where, addDoc, } from "firebase/firestore";
+ import { getFirestore, query, getDocs, collection, where, doc, setDoc, addDoc, } from "firebase/firestore";
  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
  const firebaseConfig = {
@@ -21,7 +21,7 @@ const signInWithGoogle = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q); 
     if (docs.docs.length === 0) {
-      await addDoc(collection(db, "users"), {
+      await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         name: user.displayName,
         authProvider: "google",
@@ -36,10 +36,12 @@ const signInWithGoogle = async () => {
 
 const logout = () => {
     signOut(auth);
-  };
+};
+
+
  
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-export { auth, db, signInWithGoogle, logout, };
+export { auth, db, signInWithGoogle, logout };

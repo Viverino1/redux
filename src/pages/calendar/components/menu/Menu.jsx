@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import Months from "../months/Months";
+import NewEventButton from '../newEvent/NewEventButton';
 
 const Menu = () => {
     const isActive = useSelector((state) => state.menu.isActive)
@@ -11,6 +12,9 @@ const Menu = () => {
                 </div>
                 <div className="w-full flex justify-center items-center overflow-clip">
                     <Months/>
+                </div>
+                <div className="w-full flex justify-center items-center overflow-clip">
+                    <NewEventButton/>
                 </div>
             </div>
         </div>
