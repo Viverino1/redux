@@ -1,21 +1,5 @@
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../../../firebase_setup/firebase";
-
-let userDataRef = null;
-
-auth.onAuthStateChanged(user => {
-    if(user){
-        userDataRef = doc(db, "users", user.uid, "userData", "events");
-        setDoc(userDataRef, {eventCount: 0}, {merge : true})
-        console.log(userDataRef)
-    }else{
-        userDataRef = null;
-    }
-})
-
-const addEventData = (title, startTime, endTime) => {
-    
-}
 
 const EventHandler = ({hour}) => {
     if(hour === 7){
