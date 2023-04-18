@@ -1,10 +1,21 @@
-import { useEffect, useState } from "react";
 import { Plus } from "react-bootstrap-icons";
+import ApiCalendar from "react-google-calendar-api";
 
 const NewEventButton = () => {
 
+    const config = {
+        clientId: "216466308050-ing0f2pgdst6qpnklr531i71m5k2fegb.apps.googleusercontent.com",
+        apiKey: "AIzaSyC88Z_DM8xk21A6wTZo1m_GqnvJoPj8Ooo",
+        scope: "https://www.googleapis.com/auth/calendar",
+        discoveryDocs: [
+          "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+        ],
+    };
+
+    const apiCalendar = new ApiCalendar(config);
+
     const addNewEvent = () => {
-        console.log("new event")
+        apiCalendar.handleAuthClick();
     }
 
     return(
