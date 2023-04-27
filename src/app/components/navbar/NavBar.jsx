@@ -2,8 +2,8 @@ import { List } from "react-bootstrap-icons";
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleIsActive } from "../../../pages/calendar/components/menu/menuSlice";
 import { toggleProfileIsActive } from "../profileMenu/profileMenuSlice";
-import { auth } from "../../../firebase_setup/firebase";
 import { useEffect, useState } from "react";
+import { auth } from "../../../firebase_setup/firebase";
 
 const NavBar = () => {
     const displayDay = useSelector((state) => state.months.displayDay)
@@ -21,7 +21,7 @@ const NavBar = () => {
     const [userName, setUserName] = useState("")
     const [userPhotoURL, setUserPhotoURL] = useState("")
 
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged( user => {
         if(user){
             setUserName(user.displayName)
             setUserPhotoURL(user.photoURL)

@@ -1,6 +1,5 @@
 import DayView from "./components/dayView/DayView";
 import Menu from "./components/menu/Menu";
-import NewEventButton from "./components/newEvent/NewEventButton";
 import { useSelector, useDispatch } from 'react-redux'
 import { setDisplayDay, setDisplayMonth, incrementDisplayMonth, decrementDisplayMonth } from './components/months/monthsSlice'
 
@@ -19,9 +18,6 @@ const Calendar = () => {
             </div>
             <div className="relative top-0 right-0 left-0 bottom-0 w-full overflow-y-scroll overflow-x-clip">
                 <DayView/>
-            </div>
-            <div className="absolute bottom-0 right-0 p-5">
-                
             </div>
         </div>
     )
