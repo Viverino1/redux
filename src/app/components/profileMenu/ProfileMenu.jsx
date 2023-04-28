@@ -1,5 +1,4 @@
-import { useSelector } from 'react-redux'
-import { handleAuthClick,handleSignoutClick } from '../../../firebase_setup/firebase';
+import { useSelector } from 'react-redux';
 
 const ProfileMenu = () => {
     const profileMenuIsActive = useSelector((state) => state.profileMenu.isActive);
@@ -11,14 +10,14 @@ const ProfileMenu = () => {
                 {/* <button className=' w-32 h-8 bg-BodyColor rounded-lg' onClick={ !isLoggedIn? handleAuthClick : handleSignoutClick}>
                     {isLoggedIn ? "Logout" : "Login"}
                 </button> */}
-                <button className=' w-32 h-8 bg-BodyColor rounded-lg' onClick={ handleAuthClick }>
+                <button className=' w-32 h-8 bg-BodyColor rounded-lg'>
                     Login
                 </button>
-                <button className=' w-32 h-8 bg-BodyColor rounded-lg' onClick={ handleSignoutClick }>
+                <button className=' w-32 h-8 bg-BodyColor rounded-lg'>
                     Logout
                 </button>
                 <button className=' w-32 h-8 bg-BodyColor rounded-lg'>
-                    Settings
+                    Read
                 </button>
             </div>
         </div>
