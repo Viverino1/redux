@@ -85,15 +85,15 @@ const Months = () => {
             </div>
 
             {previousDays.map(d => (
-                <PlaceholderCalendarDay day={d}/>
+                <div key={d}><PlaceholderCalendarDay day={d}/></div>
             ))}
 
             {days.map(d => (
-                <CalendarDay day={d}/>
+                <div key={d}><CalendarDay day={d}/></div>
             ))}
 
             {futureDays.map(d => (
-                <PlaceholderCalendarDay day={d}/>
+                <div key={d}><PlaceholderCalendarDay day={d}/></div>
             ))}
         </div>
     )

@@ -43,8 +43,10 @@ const NavBar = () => {
         <div>
             <div className="absolute bottom-0 bg-BodyColor h-0.5 w-full"></div>
             <div className="w-full h-16 bg-NavBarColor text-NavBarTextColor flex justify-center items-center">
-                <button className="pl-3 absolute top-0 left-0 h-16" onClick={() => {dispatch(toggleIsActive())}}>
-                    <List color="gray" size={40}/>
+                <button className="pl-2 absolute top-0 left-0 h-16 w-16" onClick={() => {dispatch(toggleIsActive())}}>
+                    <div className=" w-12 h-12 flex justify-center items-center">
+                        <List color="gray" size={40}/>
+                    </div>
                 </button>
 
                 <div>{weekDays[dayOfWeek]}, {months[displayMonth]} {displayDay}{ending}, {displayYear}</div>

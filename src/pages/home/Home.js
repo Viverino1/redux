@@ -1,6 +1,11 @@
 const Home = () => {
+    const lines = [undefined, 1, 2, 3];
     return(
-        <div>Home Page</div>
+        <div>
+            {lines.map((line) => {
+                console.log(line)
+            })}
+        </div>
     )
 }
 

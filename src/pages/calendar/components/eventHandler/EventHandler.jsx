@@ -23,7 +23,9 @@ const Event = ({duration, title}) => {
             <ul className="bg-RedEventColor relative">
                 <div className="text-white absolute h-full flex items-center pl-5">title</div>
                 {segments.map(segment => (
-                    <Segment/>
+                    <div key={segment}>
+                        <Segment/>
+                    </div>
                 ))}
             </ul>
         </div>
