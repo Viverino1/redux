@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CaretRight, CaretLeft } from "react-bootstrap-icons";
 import { useSelector, useDispatch } from 'react-redux'
-import { setDisplayDay, setDisplayMonth, incrementDisplayMonth, decrementDisplayMonth } from './monthsSlice'
+import { setDisplayDay, incrementDisplayMonth, decrementDisplayMonth } from './monthsSlice'
 
 const Months = () => {
     const displayDay = useSelector((state) => state.months.displayDay)

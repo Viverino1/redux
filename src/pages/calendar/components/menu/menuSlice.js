@@ -15,6 +15,6 @@ export const menuSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { toggleIsActive } = menuSlice.actions
+export const { toggleIsActive } = menuSlice.actions;
 
-export default menuSlice.reducer
+export default menuSlice.reducer;

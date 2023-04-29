@@ -1,20 +1,26 @@
 import { useSelector } from 'react-redux';
+import { handleAuthClick, handleSignoutClick} from '../../../firebase_setup/firebase';
+import { auth } from '../../../firebase_setup/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useState } from 'react';
 
 const ProfileMenu = () => {
     const profileMenuIsActive = useSelector((state) => state.profileMenu.isActive);
-    const isLoggedIn = useSelector((state) => state.profileMenu.isLoggedIn);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    onAuthStateChanged(auth, user => {
+        if(user){
+            setIsLoggedIn(true);
+        }else{
+            setIsLoggedIn(false);
+        }
+    })
 
     return(
         <div className={`${profileMenuIsActive == true ? "w-40" : "w-0"}  transition-width duration-300 overflow-clip`}>
             <div className='flex flex-col space-y-5 justify-center items-center w-full p-5 bg-NavBarColor rounded-xl'>
-                {/* <button className=' w-32 h-8 bg-BodyColor rounded-lg' onClick={ !isLoggedIn? handleAuthClick : handleSignoutClick}>
+                <button className=' w-32 h-8 bg-BodyColor rounded-lg' onClick={ !isLoggedIn? handleAuthClick : handleSignoutClick}>
                     {isLoggedIn ? "Logout" : "Login"}
-                </button> */}
-                <button className=' w-32 h-8 bg-BodyColor rounded-lg'>
-                    Login
-                </button>
-                <button className=' w-32 h-8 bg-BodyColor rounded-lg'>
-                    Logout
                 </button>
                 <button className=' w-32 h-8 bg-BodyColor rounded-lg'>
                     Read

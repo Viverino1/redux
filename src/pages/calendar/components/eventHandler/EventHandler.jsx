@@ -1,6 +1,3 @@
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../../../firebase_setup/firebase";
-
 const EventHandler = ({hour}) => {
     if(hour === 7){
         return(
@@ -21,7 +18,7 @@ const Event = ({duration, title}) => {
     return(
         <div className={"ml-24 mr-10 rounded-lg overflow-clip relative top-0 right-0 left-0"}>
             <ul className="bg-RedEventColor relative">
-                <div className="text-white absolute h-full flex items-center pl-5">title</div>
+                <div className="text-white absolute h-full flex items-center pl-5">{title}</div>
                 {segments.map(segment => (
                     <div key={segment}>
                         <Segment/>

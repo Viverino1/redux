@@ -13,10 +13,10 @@ const Calendar = () => {
     }
     return(
         <div className="flex h-[calc(100vh-theme(space.16))]" onLoad={setCurrentDate()}>
-            <div className="relative top-0 left-0 bottom-0">
+            <div className="">
                 <Menu/>
             </div>
-            <div className="relative top-0 right-0 left-0 bottom-0 w-full overflow-y-scroll overflow-x-clip">
+            <div className="relative w-full overflow-y-scroll overflow-x-clip">
                 <DayView/>
             </div>
         </div>

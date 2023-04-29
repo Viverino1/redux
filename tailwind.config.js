@@ -24,6 +24,9 @@ module.exports = {
             transitionProperty: {
                 'width': 'width'
             },
+            transitionDuration: {
+                '400' : '400ms',
+            }
         },
     },
     plugins: [],

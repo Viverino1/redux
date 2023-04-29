@@ -1,12 +1,9 @@
 const Home = () => {
-    const lines = [undefined, 1, 2, 3];
+    const isOpen = true;
     return(
-        <div>
-            {lines.map((line) => {
-                console.log(line)
-            })}
+        <div className={`h-16 bg-red-500 transition-all ${isOpen? "w-80" : "w-0"}`}>
+            Home Page
         </div>
     )
 }
-
 export default Home;

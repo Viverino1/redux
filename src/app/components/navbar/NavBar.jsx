@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toggleIsActive } from "../../../pages/calendar/components/menu/menuSlice";
 import { toggleProfileIsActive } from "../profileMenu/profileMenuSlice";
 import { useState } from "react";
+import { auth } from "../../../firebase_setup/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const NavBar = () => {
     const displayDay = useSelector((state) => state.months.displayDay)
@@ -19,6 +21,16 @@ const NavBar = () => {
 
     const [userName, setUserName] = useState("")
     const [userPhotoURL, setUserPhotoURL] = useState("./cosmicLogo.png")
+
+    onAuthStateChanged(auth, user => {
+        if(user){
+            setUserName(user.displayName);
+            setUserPhotoURL(user.photoURL);
+        }else{
+            setUserName("");
+            setUserPhotoURL("./cosmicLogo.png")
+        }
+    })
 
     switch(displayDay){
         case 1:
@@ -43,7 +55,7 @@ const NavBar = () => {
         <div>
             <div className="absolute bottom-0 bg-BodyColor h-0.5 w-full"></div>
             <div className="w-full h-16 bg-NavBarColor text-NavBarTextColor flex justify-center items-center">
-                <button className="pl-2 absolute top-0 left-0 h-16 w-16" onClick={() => {dispatch(toggleIsActive())}}>
+                <button className="pl-2 absolute top-0 left-0 h-16 w-16" onClick={() => dispatch(toggleIsActive())}>
                     <div className=" w-12 h-12 flex justify-center items-center">
                         <List color="gray" size={40}/>
                     </div>

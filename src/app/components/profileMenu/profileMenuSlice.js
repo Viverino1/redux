@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   isActive: false,
-  isLoggedIn: false,
 }
 
 export const profileMenuSlice = createSlice({
@@ -12,9 +11,6 @@ export const profileMenuSlice = createSlice({
     toggleProfileIsActive(state){
         state.isActive = !state.isActive;
     },
-    setIsLoggedIn(state, action){
-        state.isLoggedIn = action.payload;
-    }
   },
 })
 
