@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toggleIsActive } from "../../../pages/calendar/components/menu/menuSlice";
 import { toggleProfileIsActive } from "../profileMenu/profileMenuSlice";
 import { useState } from "react";
-import { auth } from "../../../firebase_setup/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 const NavBar = () => {
@@ -21,16 +20,6 @@ const NavBar = () => {
 
     const [userName, setUserName] = useState("")
     const [userPhotoURL, setUserPhotoURL] = useState("./cosmicLogo.png")
-
-    onAuthStateChanged(auth, user => {
-        if(user){
-            setUserName(user.displayName);
-            setUserPhotoURL(user.photoURL);
-        }else{
-            setUserName("");
-            setUserPhotoURL("./cosmicLogo.png")
-        }
-    })
 
     switch(displayDay){
         case 1:
