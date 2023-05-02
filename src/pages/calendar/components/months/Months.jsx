@@ -10,7 +10,7 @@ const Months = () => {
     const dispatch = useDispatch()
 
     const months = [null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
+    const weekDays = ["S1", "M", "T1", "W", "T2", "F", "S2"];
 
     const daysInMonth = (month) => {
         if(month % 2 == 1){
@@ -79,7 +79,7 @@ const Months = () => {
             <div className='bg-BodyColor col-span-7 h-8 -mx-2 px-2'>
                 <div className=' grid grid-cols-7 grid-rows-8 gap-x-2'>
                     {weekDays.map(wd => (
-                        <div className='w-8 h-8 flex justify-center items-center'>{wd}</div>
+                        <div key={wd} className='w-8 h-8 flex justify-center items-center'>{wd.charAt(0)}</div>
                     ))}
                 </div>
             </div>

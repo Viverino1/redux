@@ -4,6 +4,7 @@ import { toggleIsActive } from "../../../pages/calendar/components/menu/menuSlic
 import { toggleProfileIsActive } from "../profileMenu/profileMenuSlice";
 import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../firebase_setup/firebase";
 
 const NavBar = () => {
     const displayDay = useSelector((state) => state.months.displayDay)
@@ -20,6 +21,16 @@ const NavBar = () => {
 
     const [userName, setUserName] = useState("")
     const [userPhotoURL, setUserPhotoURL] = useState("./cosmicLogo.png")
+
+    onAuthStateChanged(auth, (user) => {
+        if(user){
+            setUserName(user.displayName);
+            setUserPhotoURL(user.photoURL);
+        }else{
+            setUserName("");
+            setUserPhotoURL("./cosmicLogo.png");
+        }
+    })
 
     switch(displayDay){
         case 1:

@@ -7,13 +7,11 @@ const DayView = () => {
         lines[i] = i;
     }
 
-    console.log(lines[0])
-
     return(
         <div>
             <div className="mt-3">
                 {lines.map(line => (
-                    <div className="flex h-event">
+                    <div key={line} className="flex h-event">
                         <div className="w-20 pl-5 -mt-3 text-LinesColor" >{line <= 12? line + " AM" : line-12 + " PM"}</div>
                         <div className="w-full h-px bg-LinesColor mb-16 mr-5"/>
                         <div className="absolute w-full">
