@@ -20,7 +20,7 @@ const ProfileMenu = () => {
                 <button className=' w-32 h-8 bg-BodyColor rounded-lg' onClick={() => addEvent({title: "my new event", start: new Date().toISOString(), length: 45, rigid: true})}>
                     Write
                 </button>
-                <button className=' w-32 h-8 bg-BodyColor rounded-lg' onClick={() => readEvent()}>
+                <button className=' w-32 h-8 bg-BodyColor rounded-lg' onClick={() => readEvent(1)}>
                     Read
                 </button>
             </div>

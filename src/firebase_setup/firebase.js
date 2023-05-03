@@ -23,6 +23,10 @@ function userRef(){
     return doc(db, 'users', auth.currentUser.uid);
 }
 
+function eventRef(id){
+    return doc(db, 'users', auth.currentUser.uid, 'events', "event" + id);
+}
+
 function handleAuthClick(){
     signInWithPopup(auth, provider)
     .then(() => {
@@ -42,9 +46,8 @@ function addEvent({title, start, length, rigid}){
     getDoc(userRef())
     .then(result => {
         const eventID = result.data().eventIDCounter + 1;
-        const eventRef = doc(db, 'users', auth.currentUser.uid, 'events', "event" + eventID)
 
-        setDoc(eventRef, {
+        setDoc(eventRef(eventID), {
             title: title,
             start: start,
             length: length,
@@ -56,7 +59,7 @@ function addEvent({title, start, length, rigid}){
 }
 
 function readEvent(id){
-    getDoc(doc(db, 'users', auth.currentUser.uid)).then(result => console.log(result))
+    getDoc(eventRef(id)).then(result => console.log(result.data()))
 }
 
 function handleSignoutClick(){

@@ -2,6 +2,7 @@ import React from 'react';
 import { CaretRight, CaretLeft } from "react-bootstrap-icons";
 import { useSelector, useDispatch } from 'react-redux'
 import { setDisplayDay, incrementDisplayMonth, decrementDisplayMonth } from './monthsSlice'
+import { setIsDateSelectorActive } from '../newEventMenu/newEventMenuSlice';
 
 const Months = () => {
     const displayDay = useSelector((state) => state.months.displayDay)
@@ -48,11 +49,11 @@ const Months = () => {
     const CalendarDay = ({day}) => {
         if(day == displayDay){
             return(
-                <button className="text-NavBarColor bg-RedEventColor transition-all w-8 h-8 rounded-lg flex justify-center items-center" onClick={() => {dispatch(setDisplayDay(day))}}> {day} </button>
+                <button className="text-NavBarColor bg-RedEventColor transition-all w-8 h-8 rounded-lg flex justify-center items-center" onClick={() => {dispatch(setDisplayDay(day)); dispatch(setIsDateSelectorActive(false));}}> {day} </button>
             )
         }else{
             return(
-                <button className="bg-NavBarColor hover:bg-BodyColor hover:border-LinesColor hover:rounded-lg border-BodyColor transition-all w-8 h-8 rounded-3xl border-2 flex justify-center items-center" onClick={() => {dispatch(setDisplayDay(day))}}> {day} </button>
+                <button className="bg-NavBarColor hover:bg-BodyColor hover:border-LinesColor hover:rounded-lg border-BodyColor transition-all w-8 h-8 rounded-3xl border-2 flex justify-center items-center" onClick={() => {dispatch(setDisplayDay(day)); dispatch(setIsDateSelectorActive(false));}}> {day} </button>
             )
         }
     }

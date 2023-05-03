@@ -13,12 +13,6 @@ const NavBar = () => {
 
     const dispatch = useDispatch()
 
-    const months = [null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-    let dayOfWeek = new Date(displayYear + "-" + displayMonth + "-" + displayDay).getDay();
-    let ending;
-
     const [userName, setUserName] = useState("")
     const [userPhotoURL, setUserPhotoURL] = useState("./cosmicLogo.png")
 
@@ -32,23 +26,32 @@ const NavBar = () => {
         }
     })
 
-    switch(displayDay){
-        case 1:
-        case 21:
-        case 31:
-            ending = "st"
-            break;
-        case 2:
-        case 22:
-            ending = "nd"
-            break;
-        case 3:
-        case 23:
-            ending = "rd"
-            break;
-        default:
-            ending = "th"
-            break;
+    function dateString(date) {
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        let ending;
+
+        switch(displayDay){
+            case 1:
+            case 21:
+            case 31:
+                ending = "st"
+                break;
+            case 2:
+            case 22:
+                ending = "nd"
+                break;
+            case 3:
+            case 23:
+                ending = "rd"
+                break;
+            default:
+                ending = "th"
+                break;
+        }
+        
+        return weekDays[ date.getDay() ] + ", " + months[date.getMonth()]+ " " + date.getDay() + ending + ", " + (date.getYear() + 1900);
     }
 
     return(
@@ -61,7 +64,7 @@ const NavBar = () => {
                     </div>
                 </button>
 
-                <div>{weekDays[dayOfWeek]}, {months[displayMonth]} {displayDay}{ending}, {displayYear}</div>
+                <div>{dateString(new Date(displayYear + "-" + displayMonth + "-" + displayDay))}</div>
 
                 <button className="pr-3 absolute top-0 right-0 h-16 flex justify-center items-center space-x-5" onClick={() => {dispatch(toggleProfileIsActive())}}>
                     <div>{userName}</div>

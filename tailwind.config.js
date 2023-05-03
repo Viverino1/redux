@@ -8,8 +8,11 @@ module.exports = {
         extend: {
             spacing: {
                 '19' : '76px',
-                '23' : '92px',
                 '22' : '88px',
+                '23' : '92px',
+                '104' : '416px',
+                '106' : '424px',
+                '108' : '432px',
                 'event' : '84px',
                 '5min' : '7px',
             },
