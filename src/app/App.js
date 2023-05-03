@@ -14,10 +14,7 @@ const App = () => {
                 <div className="fixed top-16 z-40 right-0">
                     <ProfileMenu/>
                 </div>
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/calendar" element={<Calendar/>}/>
-                </Routes>
+                <Calendar/>
             </div>
         </div>
     )

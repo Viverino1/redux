@@ -65,7 +65,7 @@ const NavBar = () => {
 
                 <button className="pr-3 absolute top-0 right-0 h-16 flex justify-center items-center space-x-5" onClick={() => {dispatch(toggleProfileIsActive())}}>
                     <div>{userName}</div>
-                    <img src={userPhotoURL} alt="Cosmic Logo" className="w-10 rounded-3xl"/>
+                    <img src={userPhotoURL} alt="Cosmic Logo" className="w-10 rounded-3xl" referrerPolicy='no-referrer'/>
                 </button>
             </div>
         </div>
