@@ -14,9 +14,9 @@ const Months = () => {
     const weekDays = ["S1", "M", "T1", "W", "T2", "F", "S2"];
 
     const daysInMonth = (month) => {
-        if(month % 2 == 1){
+        if(month % 2 === 1){
             return 31
-        }else if(month == 2){
+        }else if(month === 2){
             return 28
         }else{
             return 30
@@ -47,7 +47,7 @@ const Months = () => {
     }
 
     const CalendarDay = ({day}) => {
-        if(day == displayDay){
+        if(day === displayDay){
             return(
                 <button className="text-NavBarColor bg-RedEventColor transition-all w-8 h-8 rounded-lg flex justify-center items-center" onClick={() => {dispatch(setDisplayDay(day)); dispatch(setIsDateSelectorActive(false));}}> {day} </button>
             )

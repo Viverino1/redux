@@ -26,7 +26,7 @@ const NewEventMenu = () => {
                         <div className="w-full px-4 py-2 bg-BodyColor rounded-xl select-none h-10">{dateString(new Date(displayYear + "-" + displayMonth + "-" + displayDay))}</div>
                     </button>
                     <button className="flex w-full items-center justify-center space-x-5 h-10">
-                        <div className="bg-BodyColor h-10 px-4 flex justify-center items-center rounded-xl">11:00AM</div>
+                        <input type="time" className="bg-BodyColor h-10 px-4 flex justify-center items-center rounded-xl"></input>
                         <div>-</div>
                         <div className="bg-BodyColor h-10 px-4 flex justify-center items-center rounded-xl">3:00PM</div>
                     </button>

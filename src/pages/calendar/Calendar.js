@@ -1,6 +1,5 @@
 import DayView from "./components/dayView/DayView";
 import Menu from "./components/menu/Menu";
-import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { setDisplayDay, setDisplayMonth} from './components/months/monthsSlice'
 import { setIsNewEventMenuActive, setIsDateSelectorActive } from "./components/newEventMenu/newEventMenuSlice";
