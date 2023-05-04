@@ -68,13 +68,13 @@ const Months = () => {
         <div className="grid grid-cols-7 grid-rows-8 gap-x-2 gap-y-4 border-BodyColor border-2 p-2 rounded-xl select-none">
             <div className="w-full flex items-center justify-center col-span-7 ">
                 <div className="flex items-center justify-center w-fit bg-BodyColor px-2 rounded-xl">
-                    <div onClick={() => dispatch(decrementDisplayMonth())} className="transition-all bg-BodyColor rounded-3xl border-BodyColor border-2 hover:border-LinesColor hover:border-2">
+                    <button onClick={() => dispatch(decrementDisplayMonth())} className="transition-all bg-BodyColor rounded-3xl border-BodyColor border-2 hover:border-LinesColor hover:border-2">
                         <CaretLeft color="gray" size={20}/>
-                    </div>
+                    </button>
                     <div className="w-48 h-8 bg-BodyColor px-5 py-3 flex justify-center items-center rounded-md">{months[displayMonth]} {displayYear}</div>
-                    <div onClick={() => dispatch(incrementDisplayMonth())} className="transition-all bg-BodyColor rounded-3xl border-BodyColor border-2 hover:border-LinesColor hover:border-2">
+                    <button onClick={() => dispatch(incrementDisplayMonth())} className="transition-all bg-BodyColor rounded-3xl border-BodyColor border-2 hover:border-LinesColor hover:border-2">
                         <CaretRight color="gray" size={20}/>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div className='bg-BodyColor col-span-7 h-8 -mx-2 px-2'>

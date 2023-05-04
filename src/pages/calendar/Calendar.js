@@ -1,13 +1,14 @@
 import DayView from "./components/dayView/DayView";
 import Menu from "./components/menu/Menu";
 import { useState } from "react";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setDisplayDay, setDisplayMonth} from './components/months/monthsSlice'
+import { setIsNewEventMenuActive, setIsDateSelectorActive } from "./components/newEventMenu/newEventMenuSlice";
 import NewEventMenu from "./components/newEventMenu/NewEventMenu";
 
 const Calendar = () => {
     const dispatch = useDispatch()
-    const[isNewEventMenuActive, setIsNewEventMenuActive] = useState(false);
+    const isNewEventMenuActive = useSelector((state) => state.newEventMenu.isNewEventMenuActive);
 
     const setCurrentDate = () => {
         const date = new Date();
@@ -16,7 +17,7 @@ const Calendar = () => {
     }
 
     return(
-        <div className="flex h-[calc(100vh-theme(space.16))] justify-center items-center" onLoad={setCurrentDate()}>
+        <div className="flex h-[calc(100vh-theme(space.16))] justify-center items-center select-none" onLoad={setCurrentDate()}>
             <div className="w-full h-full flex">
                 <div>
                     <Menu/>
@@ -27,12 +28,13 @@ const Calendar = () => {
             </div>
 
             <div className="absolute bottom-5 right-5">
-                <button className="bg-NavBarColor text-NavBarTextColor w-16 h-16 rounded-full text-3xl flex justify-center items-center">
+                <button className="bg-NavBarColor text-NavBarTextColor w-16 h-16 rounded-full text-3xl flex justify-center items-center"
+                onClick={() => {dispatch(setIsNewEventMenuActive(!isNewEventMenuActive)); dispatch(setIsDateSelectorActive(false))}}>
                     <div className="select-none">+</div>
                 </button>
             </div>
 
-            <div className="absolute">
+            <div className={`absolute`}>
                 <NewEventMenu/>
             </div>
         </div>

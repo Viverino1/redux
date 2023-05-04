@@ -26,32 +26,8 @@ const NavBar = () => {
         }
     })
 
-    function dateString(date) {
-        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-        let ending;
-
-        switch(displayDay){
-            case 1:
-            case 21:
-            case 31:
-                ending = "st"
-                break;
-            case 2:
-            case 22:
-                ending = "nd"
-                break;
-            case 3:
-            case 23:
-                ending = "rd"
-                break;
-            default:
-                ending = "th"
-                break;
-        }
-        
-        return weekDays[ date.getDay() ] + ", " + months[date.getMonth()]+ " " + date.getDay() + ending + ", " + (date.getYear() + 1900);
+    const displayDateString = () => {
+        return dateString(new Date(displayYear + "-" + displayMonth + "-" + displayDay));
     }
 
     return(
@@ -64,7 +40,7 @@ const NavBar = () => {
                     </div>
                 </button>
 
-                <div>{dateString(new Date(displayYear + "-" + displayMonth + "-" + displayDay))}</div>
+                <div>{displayDateString()}</div>
 
                 <button className="pr-3 absolute top-0 right-0 h-16 flex justify-center items-center space-x-5" onClick={() => {dispatch(toggleProfileIsActive())}}>
                     <div>{userName}</div>
@@ -75,4 +51,33 @@ const NavBar = () => {
     )
 }
 
+function dateString(date) {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    let ending;
+
+    switch(date.getDate()){
+        case 1:
+        case 21:
+        case 31:
+            ending = "st"
+            break;
+        case 2:
+        case 22:
+            ending = "nd"
+            break;
+        case 3:
+        case 23:
+            ending = "rd"
+            break;
+        default:
+            ending = "th"
+            break;
+    }
+    
+    return weekDays[ date.getDay() ] + ", " + months[date.getMonth()]+ " " + date.getDate() + ending + ", " + (date.getYear() + 1900);
+}
+
 export default NavBar;
+export {dateString}
